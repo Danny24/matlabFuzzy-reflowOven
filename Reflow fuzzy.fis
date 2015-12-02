@@ -1,0 +1,50 @@
+[System]
+Name='Reflow fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=12
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Tiempo'
+Range=[0 300]
+NumMFs=4
+MF1='preheat':'trimf',[0 0 155.952380952381]
+MF2='reflow':'trimf',[180 210 245.634920634921]
+MF3='soak':'trimf',[142 170 186.904761904762]
+MF4='cooling':'trimf',[236.9 280 301]
+
+[Input2]
+Name='Temperatura'
+Range=[0 220]
+NumMFs=3
+MF1='soak':'trimf',[87.010582010582 120 180]
+MF2='reflow':'trimf',[173 220 221]
+MF3='preheat':'trimf',[0 0 97.4867724867725]
+
+[Output1]
+Name='ElementoTermico'
+Range=[0 1]
+NumMFs=2
+MF1='apagado':'trimf',[-0.5 0 0.546296296296296]
+MF2='encendido':'trimf',[0.472222222222222 1 1.5]
+
+[Rules]
+1 2, 1 (1) : 1
+1 1, 2 (1) : 1
+1 3, 2 (1) : 1
+2 1, 2 (1) : 1
+2 2, 2 (1) : 1
+3 1, 2 (1) : 1
+3 2, 1 (1) : 1
+3 3, 2 (1) : 1
+4 1, 1 (1) : 1
+4 2, 1 (1) : 1
+4 3, 1 (1) : 1
+2 0, 2 (1) : 1
